@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= `Welcome to the ${participant.name} Dashboard` %></title>
+  <link rel="stylesheet" href="/styles/participant_style.css">
+</head>
+<body>
+  <h1><%= `Welcome ${participant.name}!` %></h1>
+
+  <h2>All Planned Events</h2>
+  <% events.forEach(event => { %>
+    <div class="event-box">
+      <h3><%= event.event_name %> <br> organized by <%= event.organizer_name %></h3>
+     
+      <p>Event Description: <%= event.description %></p>
+      <p>Event Date: <%= event.date %></p>
+      
+      <button class="register-btn" onclick="registerEvent('<%= event.event_name %>', '<%= event.id %>','<%= event.organizer_name %>', '<%= participant.id %>', '<%= participant.name %>')">Register</button>
+    </div>
+  <% }); %>
+
+  <h2>Your Registered Events</h2>
+  <ul class="registered-events">
+    <% registeredEvents.forEach(event => { %>
+      <li><%= event.event_name %> - <%= event.organizer_name %></li>
+    <% }); %>
+  </ul>
+  
+  <form class="logout-form" action="/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+
+
+  <form id="registerForm" action="/register-event" method="POST" style="display: none;">
+    <input type="hidden" id="eventNameInput" name="eventName">
+    <input type="hidden" id="organizerNameInput" name="organizerName">
+    <input type="hidden" id="eventIdInput" name="eventId">
+    <input type="hidden" id="participantIdInput" name="participantId">
+    <input type="hidden" id="participantNameInput" name="participantName">
+  </form>
+
+  <script>
+
+    function registerEvent(eventName, eventId, organizerName, participantId, participantName) {
+      document.getElementById('eventNameInput').value = eventName;
+      document.getElementById('organizerNameInput').value = organizerName;
+      document.getElementById('eventIdInput').value = eventId;
+      document.getElementById('participantIdInput').value = participantId;
+      document.getElementById('participantNameInput').value = participantName;
+      document.getElementById('registerForm').submit();
+    }
+  </script>
+</body>
+</html>

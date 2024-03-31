@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizer Dashboard</title>
+  <link rel="stylesheet" href="/styles/organizer_style.css">
+</head>
+<body>
+  <h1>Organizer Dashboard</h1>
+
+  <% events.forEach(event => { %>
+    <div class="event">
+      <h2><%= event.event_name %></h2>
+
+      <h4>Registered Participants:</h4>
+      <ul>
+        <% registeredParticipants.forEach(registered => { %>
+          <li><%= registered.event_id %> - <%= registered.participant_id %> <%= registered.participant_name %></li>
+          
+        <% }); %>
+      </ul>
+
+    </div>
+  <% }); %>
+
+  <form class="logout-form" action="/logout" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+
+
+</body>
+</html>
