@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const { Sequelize, DataTypes } = require("sequelize");
 const session = require("express-session");
+require('dotenv').config();
+
 
 const app = express();
 
@@ -25,8 +27,8 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 
-const sequelize = new Sequelize("fest", "root", "hellobro2", {
-  host: "localhost",
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: "mysql",
 });
 
