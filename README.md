@@ -20,4 +20,4 @@ To configure the database connection for the project, add the following environm
 DB_HOST="localhost"
 DB_USER="root"
 DB_PASSWORD="YOUR_MYSQL_DATABASE_PASSWORD"
-DB_NAME="fest"
+DB_NAME="YOUR_DATABASE_NAME"
