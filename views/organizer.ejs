@@ -1,3 +1,5 @@
+<!-- organizer.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,28 +8,134 @@
   <title>Organizer Dashboard</title>
   <link rel="stylesheet" href="/styles/organizer_style.css">
 </head>
-<body>
-  <h1>Organizer Dashboard</h1>
+<body class="body-background">
 
-  <% events.forEach(event => { %>
-    <div class="event">
-      <h2><%= event.event_name %></h2>
-
-      <h4>Registered Participants:</h4>
-      <ul>
-        <% registeredParticipants.forEach(registered => { %>
-          <li><%= registered.event_id %> - <%= registered.participant_id %> <%= registered.participant_name %></li>
-          
-        <% }); %>
-      </ul>
-
+  <div class="header">
+    <h1>Welcome Team <%= team.team_name %>!</h1>
+    <h2>Your Events</h2>
+    <div class="buttons">
+      <button onclick="window.location.href='/create_event'">Create Event</button>
+      <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
     </div>
-  <% }); %>
+  </div>
 
-  <form class="logout-form" action="/logout" method="POST">
-    <button type="submit">Logout</button>
-  </form>
+  <div class="event-list">
+    <% events.forEach(event => { %>
+      <div class="event-box">
+        <h2><%= event.event_name %></h2>
+        <div class="details">
+          <button class="show-description-btn" onclick="toggleDescription('<%= event.event_name %>-description')">Event Description</button>
+          <button class="show-team-btn" onclick="toggleDescription('<%= event.event_name %>-team')">Team/Volunteer Description</button>
+          <button class="show-participant-btn" onclick="toggleDescription('<%= event.event_name %>-participant')">Participant Description</button>
+        </div>
+        <div class="description" id="<%= event.event_name %>-description" style="display: none;">
+          <div class="description-box">
+          <h3>This is the event description for <%= event.event_name %></h3>
+          <ul>
+            <li><strong>Date:</strong> <%= event.event_date %></li>
+            <li><strong>Time:</strong> <%= event.event_time %></li>
+            <li><strong>Location:</strong> <%= event.location %></li>
+            <li><strong>Type:</strong> <%= event.event_type %></li>
+            <% if(event.event_type == 'Seminar') { %>
+              <li><strong>Speakers:</strong></li>
+              <ul>
+                <% speakers.forEach(speaker => { %>
+                  <% if(speaker.event_name === event.event_name) { %>
+                    <li><%= speaker.speaker_name %></li>
+                  <% } %>
+                <% }); %>
+              </ul>
+            <% } %>
+            <% if(event.event_type === 'Workshop') { %>
+              <li><strong>Details:</strong>
+                <ul>
+                  <% workshops.forEach(workshop => { %>
+                    <% if(workshop.event_name === event.event_name) { %>
+                      <li>Theme: <%= workshop.theme %></li>
+                      <li>Maximum Capacity: <%= workshop.max_capacity %></li>
+                      <li>Team Size: <%= workshop.team_size %></li>
+                      <li>Registration Deadline:<%= workshop.registration_deadline %></li>
+                    <% } %>
+                  <% }); %>
+                </ul>
+              </li>
+            <% } %>
+            
+            <li><strong>Budget:</strong> <%= event.budget %></li>
+            <li><strong>Sponsors:</strong></li>
+            <ul>
+              <% sponsors.forEach(sponsor => { %>
+                <% if(sponsor.event_name === event.event_name) { %>
+                  <li><%= sponsor.sponsor_name %></li>
+                <% } %>
+              <% }); %>
+            </ul>
+          </ul>
+        </div>
+        </div>
+        <div class="team-description" id="<%= event.event_name %>-team" style="display: none;">
+          <h3>This is the team/volunteer description for <%= event.event_name %></h3>
+          <ul>
+            <% volunteers.forEach(volunteer => { %>
+              <li class="team-box">
+                <strong>Name:</strong> <%= volunteer.fname %> <%= volunteer.lname %><br>
+                <strong>Roll Number:</strong> <%= volunteer.roll_number %><br>
+                <strong>Phone Number:</strong> <%= volunteer.phone_number %>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+        <div class="participant-description" id="<%= event.event_name %>-participant" style="display: none;">
+          <h3>This is the description of registered participants for <%= event.event_name %></h3>
+          <ul>
+            <% participants.forEach(participant => { %>
+              <% if(participant.event_name === event.event_name) { %>
+                <li class="participant-box">
+                  <strong>Name:</strong> <%= participant.fname %> <%= participant.lname %><br>
+                  <strong>Email:</strong> <%= participant.email %><br>
+                  <strong>College:</strong> <%= participant.college_name %><br>
+                  <strong>Roll Number:</strong> <%= participant.roll_number %><br>
+                  <strong>Gender:</strong> <%= participant.gender %><br>
+                  <strong>Participant Type:</strong> <%= participant.participant_type %>
+                  <ul>
+                  <% if (participant.participant_type === 'InHouse') { %>
+                    <% inHouse.forEach(inItem => { %>
+                      <%  if(inItem.participant_id==participant.participant_id){ %>
+                        <li>Hall No: <%=inItem.hall_no%></li>
+                      <% } %>
+                    <% }); %>
+                <% } %>
+                
+                    <% if(participant.participant_type === 'Outside') { %>
+                      <% outside.forEach(outItem => { %>
+                        <%  if(outItem.participant_id==participant.participant_id){ %>
+                          <li>City: <%=outItem.city%></li>
+                          <li>State: <%=outItem.state%></li>
+                          <li>Accommodation: <%=outItem.accommodation%></li>
+                        <% } %>
+                      <% }); %>
+                    <% } %>
+                  </ul>
+                </li>
+              <% } %>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    <% }); %>
+  </div>
 
-
+  <script>
+    function toggleDescription(descriptionId) {
+      const description = document.getElementById(descriptionId);
+      if (description.style.display === "none") {
+        description.style.display = "block";
+      } else {
+        description.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>

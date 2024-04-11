@@ -1,18 +1,15 @@
-/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styles */
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f8f9fa;
   color: #333;
 }
 
-/* Container styles */
 .container {
   max-width: 400px;
   margin: 100px auto;
@@ -23,19 +20,18 @@ body {
   text-align: center;
 }
 
-/* Title styles */
+
 h1 {
   font-size: 32px;
   margin-bottom: 30px;
   color: #333;
 }
 
-/* Form styles */
+
 form {
   margin-bottom: 20px;
 }
 
-/* Label styles */
 label {
   display: block;
   margin-bottom: 10px;
@@ -44,7 +40,7 @@ label {
   text-align: left;
 }
 
-/* Input styles */
+input[type="text"], 
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -55,7 +51,6 @@ input[type="password"] {
   margin-bottom: 20px;
 }
 
-/* Button styles */
 button[type="submit"] {
   background-color: #007bff;
   color: #fff;

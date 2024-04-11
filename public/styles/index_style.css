@@ -1,19 +1,15 @@
-/* styles/index_style.css */
 
-/* Resetting default margin and padding */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
 }
 
-/* Header styles */
 header {
   background-color: #343a40;
   color: #fff;
@@ -32,12 +28,11 @@ header h1 {
   margin-top: 10px;
 }
 
-/* Main styles */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 120px); /* Adjust as necessary */
+  min-height: calc(100vh - 120px);
 }
 
 .login-section {
@@ -88,7 +83,7 @@ main {
   opacity: 0.8;
 }
 
-/* Footer styles */
+
 footer {
   background-color: #343a40;
   color: #fff;

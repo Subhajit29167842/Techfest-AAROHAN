@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event</title>
+  <link rel="stylesheet" href="/styles/create_event_style.css">
+</head>
+<body>
+  <header>
+    <h1>Create Event</h1>
+    <div class="header-buttons">
+      <button class="back-to-dashboard-link" onclick="location.href='/organizer'">Back to Dashboard</button>
+      <form class="logout-form" action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </header>
+  
+
+  <main>
+    <form action="/create-event" method="POST" id="event-form" class="create-event-form">
+      <div class="form-group">
+        <label for="event_name">Event Name:</label>
+        <input type="text" id="event_name" name="event_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="event_date">Event Date:</label>
+        <input type="date" id="event_date" name="event_date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="event_time">Event Time:</label>
+        <input type="time" id="event_time" name="event_time" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+      </div>
+
+      <div class="form-group">
+        <label for="budget">Budget:</label>
+        <input type="number" id="budget" name="budget" step="0.01" required>
+      </div>
+
+      <div id="sponsor-details" class="form-group hidden">
+        
+      </div>
+      <button type="button" id="add-sponsor">Add Sponsor</button>
+      
+
+      <div class="form-group">
+        <label for="event_type">Event Type:</label>
+        <select id="event_type" name="event_type" required>
+          <option value="" disabled selected>Select Event Type</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Seminar">Seminar</option>
+        </select>
+      </div>
+
+      <div id="workshop-details" class="form-group hidden">
+        <label for="theme">Theme:</label>
+        <input type="text" id="theme" name="theme">
+        
+        <label for="max_capacity">Max Capacity:</label>
+        <input type="number" id="max_capacity" name="max_capacity">
+
+        <label for="registration_deadline">Registration Deadline:</label>
+        <input type="date" id="registration_deadline" name="registration_deadline">
+
+        <label for="team_size">Team Size:</label>
+        <input type="number" id="team_size" name="team_size">
+      </div>
+
+      <div id="seminar-details" class="form-group hidden">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic">
+
+        <div id="speaker-details" class="form-group">
+        
+        </div>
+        <button type="button" id="add-speaker">Add Speaker</button>
+        <br>
+        <label for="target_audience">Target Audience:</label>
+        <input type="text" id="target_audience" name="target_audience">
+      </div>
+
+      <button type="submit">Create Event</button>
+    </form>
+  </main>
+
+  <!-- <script>
+    document.getElementById('event_type').addEventListener('change', function() {
+      var workshopDetails = document.getElementById('workshop-details');
+      var seminarDetails = document.getElementById('seminar-details');
+      
+      if (this.value === 'Workshop') {
+        workshopDetails.classList.remove('hidden');
+        seminarDetails.classList.add('hidden');
+      } else if (this.value === 'Seminar') {
+        workshopDetails.classList.add('hidden');
+        seminarDetails.classList.remove('hidden');
+      }else {
+        submitBtn.disabled = true;
+      }
+    });
+  </script> -->
+
+<script>
+  document.getElementById('event_type').addEventListener('change', function() {
+    var workshopDetails = document.getElementById('workshop-details');
+    var seminarDetails = document.getElementById('seminar-details');
+    var sponsorDetails = document.getElementById('sponsor-details');
+    
+    if (this.value === 'Workshop') {
+      workshopDetails.classList.remove('hidden');
+      seminarDetails.classList.add('hidden');
+      sponsorDetails.classList.remove('hidden');
+    } else if (this.value === 'Seminar') {
+      workshopDetails.classList.add('hidden');
+      seminarDetails.classList.remove('hidden');
+      sponsorDetails.classList.remove('hidden');
+    } else {
+      submitBtn.disabled = true;
+      workshopDetails.classList.add('hidden');
+      seminarDetails.classList.add('hidden');
+      sponsorDetails.classList.add('hidden');
+    }
+  });
+
+
+  document.getElementById('sponsor-details').classList.add('hidden');
+
+  // Event listener for the "Add Sponsor" button
+  document.getElementById('add-sponsor').addEventListener('click', function() {
+    var sponsorDetails = document.getElementById('sponsor-details');
+    
+    // Show the sponsor details section
+    sponsorDetails.classList.remove('hidden');
+    
+    // Create and append new sponsor input fields
+    var newSponsorGroup = document.createElement('div');
+    newSponsorGroup.classList.add('form-group');
+
+    var sponsorNameLabel = document.createElement('label');
+    sponsorNameLabel.setAttribute('for', 'sponsor_name');
+    sponsorNameLabel.textContent = 'Sponsor Name:';
+    newSponsorGroup.appendChild(sponsorNameLabel);
+
+    var sponsorNameInput = document.createElement('input');
+    sponsorNameInput.setAttribute('type', 'text');
+    sponsorNameInput.setAttribute('name', 'sponsor_name[]');
+    newSponsorGroup.appendChild(sponsorNameInput);
+
+    var sponsorAmountLabel = document.createElement('label');
+    sponsorAmountLabel.setAttribute('for', 'sponsor_amount');
+    sponsorAmountLabel.textContent = 'Amount:';
+    newSponsorGroup.appendChild(sponsorAmountLabel);
+
+    var sponsorAmountInput = document.createElement('input');
+    sponsorAmountInput.setAttribute('type', 'number');
+    sponsorAmountInput.setAttribute('name', 'sponsor_amount[]');
+    sponsorAmountInput.setAttribute('step', '0.01');
+    newSponsorGroup.appendChild(sponsorAmountInput);
+
+    sponsorDetails.appendChild(newSponsorGroup);
+  });
+
+
+  document.getElementById('add-speaker').addEventListener('click', function() {
+    var speakerDetails = document.getElementById('speaker-details');
+    
+    var newspeakerGroup = document.createElement('div');
+    newspeakerGroup.classList.add('form-group');
+
+    var name = document.createElement('label');
+    name.setAttribute('for', 'name');
+    name.textContent = 'speaker Name:';
+    newspeakerGroup.appendChild(name);
+
+    var Input = document.createElement('input');
+    Input.setAttribute('type', 'text');
+    Input.setAttribute('name', 'speaker_name[]');
+    newspeakerGroup.appendChild(Input);
+
+
+    speakerDetails.appendChild(newspeakerGroup);
+  });
+</script>
+
+</body>
+</html>
+ 

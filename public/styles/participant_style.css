@@ -1,18 +1,23 @@
-/* Reset default margin and padding */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styles */
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
   color: #333;
   margin: 0;
   padding: 20px;
+  background-image: url('/images/aarohan-background.jpg');
+  background-size: cover; 
+  background-position: center center;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
 }
 
 /* Header styles */
@@ -24,40 +29,46 @@ h3 {
 
 h1 {
   font-size: 24px;
+  color: white;
+
 }
 
 h2 {
   font-size: 20px;
+  color: white;
+
 }
 
 h3 {
   font-size: 18px;
+  color:#007bff;
+  
 }
-
-/* Event box styles */
+.event-list {
+  display: flex;
+  flex-wrap: wrap;
+}
 .event-box {
-  background-color: #fff;
+  flex: 0 0 calc(33.33% - 20px);
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin-bottom: 20px;
   transition: transform 0.3s ease-in-out;
 }
 
-.event-box h3 {
-  color: #007bff;
-  margin-bottom: 10px;
-}
-
-.event-box p {
-  margin-bottom: 10px;
-}
 
 .event-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
-/* Button styles */
+
+.event-box h2 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
 .register-btn {
   background-color: #007bff;
   color: #fff;
@@ -72,19 +83,40 @@ h3 {
   background-color: #0056b3;
 }
 
-/* Registered events list styles */
-.registered-events {
-  list-style: none;
-  padding: 0;
+.registered-event-list {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.registered-events li {
+.registered-event-box {
+  flex: 0 0 calc(33.33% - 20px);
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.registered-event-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.registered-event-box h2 {
+  color: #007bff;
   margin-bottom: 10px;
 }
 
-/* Logout form styles */
+
 .logout-form {
-  margin-top: 20px;
+  position: fixed; 
+  top: 20px; 
+  right: 20px;
+  z-index: 999; 
+  display: flex;
+  align-items: center; 
 }
 
 .logout-form button {
@@ -95,14 +127,19 @@ h3 {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  position: fixed;
-  top: 20px;
-  right: 20px;
 }
 
 .logout-form button:hover {
   background-color: #c82333;
 }
+ul {
+  padding: 10px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
@@ -124,3 +161,5 @@ h3 {
     font-size: 16px;
   }
 }
+
+

@@ -7,48 +7,134 @@
   <link rel="stylesheet" href="/styles/participant_style.css">
 </head>
 <body>
-  <h1><%= `Welcome ${participant.name}!` %></h1>
-
+  <div class="container">
+    <header>
+    <h1><%= `Welcome ${participant.fname} ${participant.lname}!` %></h1>
+      
+    <form class="logout-form" action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </header>
   <h2>All Planned Events</h2>
+  <div class="event-list">
   <% events.forEach(event => { %>
     <div class="event-box">
-      <h3><%= event.event_name %> <br> organized by <%= event.organizer_name %></h3>
-     
-      <p>Event Description: <%= event.description %></p>
-      <p>Event Date: <%= event.date %></p>
-      
-      <button class="register-btn" onclick="registerEvent('<%= event.event_name %>', '<%= event.id %>','<%= event.organizer_name %>', '<%= participant.id %>', '<%= participant.name %>')">Register</button>
+      <h3><%= event.event_name %> -organized by- <%= event.team_name %></h3>
+      <p>Event Date: <%=event.event_date%></p>
+      <p>Organizer email: <%=event.email%></p>
+      <% if (seminars.find(seminar => seminar.event_name === event.event_name)) { %>
+        <% const seminar = seminars.find(seminar => seminar.event_name === event.event_name); %>
+        <p>Event Type: Seminar</p>
+        <p>Topic: <%= seminar.topic %></p>
+
+        <p>Speakers</p>
+        <ul>
+          <% speakers.forEach(speaker => { %> 
+            <% if(speaker.event_name === event.event_name) { %>
+              <li><%=speaker.speaker_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+
+        <p>Sponsors</p>
+        <ul>
+          <% sponsors.forEach(sponsor => { %> 
+            <% if(sponsor.event_name === event.event_name) { %>
+              <li><%=sponsor.sponsor_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+
+        <p>Target Audience: <%= seminar.target_audience %></p>
+        <button class="register-btn" onclick="registerEvent('<%= event.event_name %>', '<%= participant.participant_id %>')">Register</button>
+      <% } else if (workshops.find(workshop => workshop.event_name === event.event_name)) { %>
+        <% const workshop = workshops.find(workshop => workshop.event_name === event.event_name); %>
+        <p>Event Type: Workshop</p>
+        <p>Theme: <%= workshop.theme %></p>
+        <!-- <p>Max Capacity: <%= workshop.max_capacity %></p> -->
+        <p>Registration Deadline: <%= workshop.registration_deadline %></p>
+        <p>Sponsors</p>
+        <ul>
+          <% sponsors.forEach(sponsor => { %> 
+            <% if(sponsor.event_name === event.event_name) { %>
+              <li><%=sponsor.sponsor_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+        <p>Team Size: <%= workshop.team_size %></p>
+        <button class="register-btn" onclick="registerEvent('<%= event.event_name %>', '<%= participant.participant_id %>')">Register</button>
+      <% }  %>
     </div>
   <% }); %>
+</div>
 
   <h2>Your Registered Events</h2>
-  <ul class="registered-events">
-    <% registeredEvents.forEach(event => { %>
-      <li><%= event.event_name %> - <%= event.organizer_name %></li>
-    <% }); %>
-  </ul>
+  <div class="registered-event-list">
+  <% registeredEvents.forEach(event => { %>
+    <div class="registered-event-box">
+      <h3><%= event.event_name %> -organized by- <%= event.team_name %></h3>
+      <p>Event Date: <%=event.event_date%></p>
+      <p>Organizer email: <%=event.email%></p>
+      <% if (seminars.find(seminar => seminar.event_name === event.event_name)) { %>
+        <% const seminar = seminars.find(seminar => seminar.event_name === event.event_name); %>
+        <p>Event Type: Seminar</p>
+        <p>Topic: <%= seminar.topic %></p>
+        <p>Speakers</p>
+        <ul>
+          <% speakers.forEach(speaker => { %> 
+            <% if(speaker.event_name === event.event_name) { %>
+              <li><%=speaker.speaker_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+
+        <p>Sponsors</p>
+        <ul>
+          <% sponsors.forEach(sponsor => { %> 
+            <% if(sponsor.event_name === event.event_name) { %>
+              <li><%=sponsor.sponsor_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+        <p>Target Audience: <%= seminar.target_audience %></p>
+        
+      <% } else if (workshops.find(workshop => workshop.event_name === event.event_name)) { %>
+        <% const workshop = workshops.find(workshop => workshop.event_name === event.event_name); %>
+        <p>Event Type: Workshop</p>
+        <p>Theme: <%= workshop.theme %></p>
+        <!-- <p>Max Capacity: <%= workshop.max_capacity %></p> -->
+        <p>Registration Deadline: <%= workshop.registration_deadline %></p>
+        <p>Sponsors</p>
+        <ul>
+          <% sponsors.forEach(sponsor => { %> 
+            <% if(sponsor.event_name === event.event_name) { %>
+              <li><%=sponsor.sponsor_name %></li>
+            <% } %>
+          <% }); %>
+        </ul>
+        <p>Team Size: <%= workshop.team_size %></p>
+        
+      <% }  %>
+    </div>
+  <% }); %>
+</div>
   
   <form class="logout-form" action="/logout" method="POST">
     <button type="submit">Logout</button>
   </form>
-
+</div>
 
   <form id="registerForm" action="/register-event" method="POST" style="display: none;">
-    <input type="hidden" id="eventNameInput" name="eventName">
-    <input type="hidden" id="organizerNameInput" name="organizerName">
-    <input type="hidden" id="eventIdInput" name="eventId">
-    <input type="hidden" id="participantIdInput" name="participantId">
-    <input type="hidden" id="participantNameInput" name="participantName">
+    <input type="hidden" id="event_name" name="event_name">
+    <input type="hidden" id="participant_id" name="participant_id">
   </form>
 
   <script>
 
-    function registerEvent(eventName, eventId, organizerName, participantId, participantName) {
-      document.getElementById('eventNameInput').value = eventName;
-      document.getElementById('organizerNameInput').value = organizerName;
-      document.getElementById('eventIdInput').value = eventId;
-      document.getElementById('participantIdInput').value = participantId;
-      document.getElementById('participantNameInput').value = participantName;
+    function registerEvent(event_name,participant_id) {
+      document.getElementById('event_name').value = event_name;
+      document.getElementById('participant_id').value = participant_id;
+      
       document.getElementById('registerForm').submit();
     }
   </script>
