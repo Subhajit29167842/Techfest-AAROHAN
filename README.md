@@ -2,7 +2,7 @@
 
 ## Overview
 
-TechAAROHAN is an innovative project designed for the  Tech Fest. It aims to showcase cutting-edge technologies and provide attendees with an immersive experience in the world of technology.
+TechAAROHAN is a basic version of a college fest management website.
 
 
 
