@@ -5,38 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Volunteers</title>
   <style>
-   
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555555;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    button[type="submit"],
     .btn {
-      display: inline-block;
-      padding: 8px 16px;
+      width: 100%;
+      padding: 10px;
       background-color: #007bff;
       color: white;
-      text-decoration: none;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none; /* Added for consistency */
+      display: inline-block; /* Added for consistency */
+      text-align: center; /* Added for consistency */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow for 3D effect */
+    }
+    
+    button[type="submit"]:hover,
+    .btn:hover {
+      background-color: #4d94ff; /* Lighter shade of blue on hover */
+    }
+    
+    .button:hover {
+      background-color:#002ead;
+      transition: 0.7s;
     }
 
-    
-    .btn:hover {
-      background-color: #0056b3;
+    /* Center-align the button */
+    .center {
+      text-align: center;
+    }
+
+    /* Add margin-bottom to the "Add Volunteer" button */
+    button[type="submit"] {
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
   <h1>Add Volunteers</h1>
   <form action="/add_volunteers" method="POST">
-    <label for="roll_number">Roll Number:</label>
+    <label for="rollNumber">Roll Number:</label>
     <input type="text" id="rollNumber" name="rollNumber" required>
     <label for="fname">First Name:</label>
     <input type="text" id="fname" name="fname" required>
     <label for="lname">Last Name:</label>
     <input type="text" id="lname" name="lname" required>
-    <label for="phone_number">Phone Number:</label>
+    <label for="phoneNumber">Phone Number:</label>
     <input type="text" id="phoneNumber" name="phoneNumber" required>
     
-    <button type="submit">Add Volunteer</button>
-    <a href="/organizer" class="btn">Organizer Login</a>
+    <button type="submit"><B>Add Volunteer</B></button>
+    <div class="center"> <!-- Container for centering the button -->
+      <a href="/organizer" class="btn button" style="background-color: #9ACD32; color: purple; width: 50%;"><strong>Organizer Login</strong></a>
+    </div>
   </form>
 </body>
 </html>
