@@ -86,3 +86,40 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
+/* Style for the gender dropdown */
+#gender {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><path fill="%23333" d="M15 0l15 20H0z"/></svg>'); /* Custom arrow icon */
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+/* Style for the gender dropdown options */
+#gender option {
+  background-color: #fff;
+  color: #333;
+}
+#participantType{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none; /* Remove default arrow icon */
+  -webkit-appearance: none; /* Remove default arrow icon for webkit browsers */
+  -moz-appearance: none; /* Remove default arrow icon for firefox */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><path fill="%23333" d="M15 0l15 20H0z"/></svg>'); /* Custom arrow icon */
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center;
+  background-size: 16px;
+  cursor: pointer;
+}
