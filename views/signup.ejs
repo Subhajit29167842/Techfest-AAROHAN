@@ -1,5 +1,6 @@
 <!-- signup.ejs -->
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,19 +27,26 @@
     <form action="/signup/organizer" method="POST">
       <label for="teamName">Team Name:</label>
       <input type="text" id="teamName" name="teamName" required>
+      <br><br>
       <label for="email">Organizer Email:</label>
       <input type="email" id="email" name="email" required>
+      <br><br>
       <label for="headFname">Head First Name:</label>
       <input type="text" id="headFname" name="headFname" required>
+      <br><br>
       <label for="headLname">Head Last Name:</label>
       <input type="text" id="headLname" name="headLname" required>
+      <br><br>
       <label for="headRollNumber">Head Roll Number:</label>
       <input type="text" id="headRollNumber" name="headRollNumber" required>
+      <br><br>
       <label for="headPhoneNumber">Head Phone Number:</label>
       <input type="text" id="headPhoneNumber" name="headPhoneNumber" required>
+      <br><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
-      <button type="submit">Sign Up</button>
+      <br><br>
+       <button type="submit">Sign Up</button></span>
     </form>
     
   </div>
@@ -48,25 +56,26 @@
   <form action="/signup/participant" method="POST">
     <label for="fname">First Name:</label>
     <input type="text" id="fname" name="fname" required><br>
-
+   <br>
     <label for="lname">Last Name:</label>
     <input type="text" id="lname" name="lname" required><br>
-
+<br>
     <label for="email">Participant Email:</label>
     <input type="email" id="email" name="email" required>
-
+<br><br>
     <label for="college_name">College Name:</label>
     <input type="text" id="college_name" name="college_name" required><br>
-
+<br>
     <label for="rollNumber">Roll Number:</label>
     <input type="text" id="rollNumber" name="rollNumber" required><br>
-
+<br>
     <label for="gender">Gender:</label>
     <select id="gender" name="gender" required>
-      <option value="M">Male</option>
-      <option value="F">Female</option>
+      <option value="M">Male</option><br>
+      <option value="F">Female</option><br>
       <option value="O">Other</option>
     </select><br>
+    <br>
 
     <label for="participantType">Participant Type:</label>
     <select id="participantType" name="participantType" onchange="showFields()" required>
@@ -76,6 +85,7 @@
     </select><br>
 
     <div id="inHouseFields" style="display: none;">
+      <br><br>
       <label for="hallNo">Hall Number:</label>
       <input type="text" id="hallNo" name="hallNo"><br>
     </div>
@@ -89,9 +99,11 @@
 
       <br>
     </div>
-
+   <br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
+    <br>
+    <br><br>
     <button type="submit">Sign Up</button>
   </form>
 
